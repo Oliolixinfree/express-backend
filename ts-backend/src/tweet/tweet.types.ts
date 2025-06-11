@@ -1,3 +1,3 @@
-export interface ITwit {
+export interface ITweet {
     description: string
 }

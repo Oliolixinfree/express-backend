@@ -1,5 +1,5 @@
 import express from 'express'
-import { twitRouter } from './src/twit/twit.controller.js'
+import { tweetRouter } from './src/tweet/tweet.controller.js'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -17,10 +17,10 @@ app.set('view engine', 'ejs')
 async function main() {
     app.use(express.json())
 
-    app.use('/api/twits', twitRouter)
+    app.use('/api/tweets', tweetRouter)
 
     app.get('/random-data', (req, res) => {
-        res.render('twit', {
+        res.render('tweet', {
             data: {
                 text: 'sample text',
                 description: 'sample description',
