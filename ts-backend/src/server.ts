@@ -1,27 +1,24 @@
 import express from 'express'
-import { twitRouter } from './twit/twit.controller'
 import dotenv from 'dotenv'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import { NextFunction, Request, Response } from 'express'
+import { tweetRouter } from './tweet/tweet.controller'
 
 dotenv.config()
 
 const app = express()
 
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
-
-app.set('views', path.join(__dirname, '/src/views'))
 app.set('view engine', 'ejs')
+// app.set('views', path.join('/src/views'))
+app.set('views', path.join(__dirname, 'views'))
 
 async function main() {
     app.use(express.json())
 
-    app.use('/api/twits', twitRouter)
+    app.use('/api/tweets', tweetRouter)
 
     app.get('/random-data', (req, res) => {
-        res.render('twit', {
+        res.render('tweet', {
             data: {
                 text: 'sample text',
                 description: 'sample description',
