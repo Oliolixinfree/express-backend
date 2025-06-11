@@ -1,15 +1,16 @@
 import express from 'express'
-import { twitRouter } from './src/twit/twit.controller.js'
+import { twitRouter } from './twit/twit.controller'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { NextFunction, Request, Response } from 'express'
 
 dotenv.config()
 
 const app = express()
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
 
 app.set('views', path.join(__dirname, '/src/views'))
 app.set('view engine', 'ejs')
@@ -32,7 +33,7 @@ async function main() {
         throw new Error('error')
     })
 
-    app.use((err, req, res, next) => {
+    app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         console.error(err.stack)
         res.status(500).json({ message: 'Something went wrong!' })
     })
